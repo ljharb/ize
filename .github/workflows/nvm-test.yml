@@ -12,10 +12,12 @@ jobs:
 
       - name: Run 0.39.7 1 shell level
         run: |
+          echo $- # which options are set
           curl -I --compressed -v https://nodejs.org/dist/
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-          source ~/.nvm/nvm.sh && nvm --version
-          source ~/.nvm/nvm.sh && nvm install
+          source ~/.nvm/nvm.sh
+          nvm --version
+          nvm install
 
   nvm-0-40-0-1shell-lvl:
     runs-on: ubuntu-latest
@@ -27,10 +29,12 @@ jobs:
 
       - name: Run 0.40.0 1 shell level
         run: |
+          echo $- # which options are set
           curl -I --compressed -v https://nodejs.org/dist/
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-          source ~/.nvm/nvm.sh && nvm --version
-          source ~/.nvm/nvm.sh && nvm install
+          source ~/.nvm/nvm.sh
+          nvm --version
+          nvm install
 
   nvm-head-1shell-lvl:
     runs-on: ubuntu-latest
@@ -42,10 +46,49 @@ jobs:
 
       - name: Run HEAD 1 shell level
         run: |
+          echo $- # which options are set
           curl -I --compressed -v https://nodejs.org/dist/
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/HEAD/install.sh | bash
-          source ~/.nvm/nvm.sh && nvm --version
-          source ~/.nvm/nvm.sh && nvm install
+          source ~/.nvm/nvm.sh
+          nvm --version
+          nvm install
+
+  nvm-fix-1shell-lvl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Run 09cf8c07404c0bfc545d553828d042a1e1e26caa 1 shell level
+        run: |
+          echo $- # which options are set
+          curl -I --compressed -v https://nodejs.org/dist/
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/09cf8c07404c0bfc545d553828d042a1e1e26caa/install.sh | bash
+          curl https://raw.githubusercontent.com/nvm-sh/nvm/09cf8c07404c0bfc545d553828d042a1e1e26caa/nvm.sh -o ~/.nvm/nvm.sh
+          set -x
+          source ~/.nvm/nvm.sh
+          nvm --version
+          nvm install
+
+  nvm-save-1shell-lvl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Run f439acd 1 shell level
+        run: |
+          echo $- # which options are set
+          curl -I --compressed -v https://nodejs.org/dist/
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/f439acd/install.sh | bash
+          curl https://raw.githubusercontent.com/nvm-sh/nvm/f439acd/nvm.sh -o ~/.nvm/nvm.sh
+          source ~/.nvm/nvm.sh
+          nvm --version
+          nvm install
 
   nvm-0-39-7-2shell-lvls:
     runs-on: ubuntu-latest
@@ -57,10 +100,10 @@ jobs:
 
       - name: Run 0.39.7 2 shell levels
         run: |
+          echo $- # which options are set
           curl -I --compressed -v https://nodejs.org/dist/
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-          bash -c "source ~/.nvm/nvm.sh && nvm --version"
-          bash -c "source ~/.nvm/nvm.sh && nvm install"
+          bash -c "source ~/.nvm/nvm.sh && nvm --version && nvm install"
 
   nvm-0-40-0-2shell-lvls:
     runs-on: ubuntu-latest
@@ -75,12 +118,13 @@ jobs:
           node --version
           echo $NVM_DIR
 
+          echo $- # which options are set
           curl -I --compressed -v https://nodejs.org/dist/
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
           mkdir ~/.nvm/versions
           echo $NVM_DIR
           tree -L 3 ~/.nvm/versions
-          bash -c "source ~/.nvm/nvm.sh && nvm --version"
+          bash -c "source ~/.nvm/nvm.sh && nvm --version && nvm install"
 
   nvm-head-2shell-lvls:
     runs-on: ubuntu-latest
@@ -95,9 +139,10 @@ jobs:
           node --version
           echo $NVM_DIR
 
+          echo $- # which options are set
           curl -I --compressed -v https://nodejs.org/dist/
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/HEAD/install.sh | bash
           mkdir ~/.nvm/versions
           echo $NVM_DIR
           tree -L 3 ~/.nvm/versions
-          bash -c "source ~/.nvm/nvm.sh && nvm --version"
+          bash -c "source ~/.nvm/nvm.sh && nvm --version && nvm install"
